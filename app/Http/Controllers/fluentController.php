@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
+use App\Models\Post;
+
 class fluentController extends Controller
 {
     public function index(Request $request){
@@ -91,5 +93,34 @@ class fluentController extends Controller
             'body' => $request->body,
         ]);
         return redirect()->to('/posts');
+    }
+
+    public function innnerJoin(){
+        $req = DB::table('users')
+                  ->join('posts','users.id', '=','posts.user_id')
+                  ->select('users.name','posts.title','posts.body')
+                  ->get();
+
+                  return $req;
+    }
+
+    public function leftJoin(){
+        $result = DB::table('users')
+                     ->leftJoin('posts','users.id','=','posts.user_id')
+                     ->get();
+                return $result;
+    }
+
+    public function rightJoin(){
+        $result = DB::table('users')
+                     ->rightJoin('posts','users.id','=','posts.user_id')
+                     ->get();
+                return $result;
+    }
+
+    public function getAllPostModel(){
+        $post = Post::all();
+
+        return $post;
     }
 }

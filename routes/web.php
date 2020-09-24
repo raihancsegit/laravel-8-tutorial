@@ -6,6 +6,8 @@ use App\Http\Controllers\homeController;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\fluentController;
 use App\Http\Controllers\loginController;
+use App\Http\Controllers\PaginationController;
+use App\Http\Controllers\fileUploadController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,7 +23,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home/{name?}',[homeController::class,'index']);
+//Route::get('/home/{name?}',[homeController::class,'index']);
 
 // Route::get('/user',[userController::class,'index']);
 // Route::get('/posts',[userController::class,'posts']);
@@ -43,3 +45,27 @@ Route::post('/postSubmit',[fluentController::class,'postSubmit'])->name('post.su
 Route::get('/postView/{id}',[fluentController::class,'postView']);
 Route::post('/update/{id}',[fluentController::class,'postUpdate']);
 Route::get('/deletePost/{id}',[fluentController::class,'postDelete']);
+
+Route::get('/innerjoin',[fluentController::class,'innnerJoin']);
+Route::get('/leftjoin',[fluentController::class,'leftJoin']);
+Route::get('/rightjoin',[fluentController::class,'rightJoin']);
+Route::get('/getallpostmodel',[fluentController::class,'getAllPostModel']);
+Route::get('/allusers',[PaginationController::class,'alluser']);
+Route::get('/fileupload',[fileUploadController::class,'fileupload']);
+Route::post('/fileuploadSubmmit',[fileUploadController::class,'fileuploadSubmmit'])->name('upload.uploadfile');
+
+Route::get('/test',function(){
+    return view('test');
+});
+
+Route::get('/home',function(){
+    return view('home');
+});
+
+Route::get('/about',function(){
+    return view('about');
+});
+
+Route::get('/contact',function(){
+    return view('contact');
+});
